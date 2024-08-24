@@ -33,15 +33,8 @@ class HomeScreen extends StatelessWidget {
             MoviePoster(
                 postHeight: screenWidth * 1.2,
                 imageLink:
-                    'https://webneel.com/daily/sites/default/files/images/daily/01-2016/12-the-angry-birds-poster-animation-movie-list-2016.jpg'),
-            MoviePoster(
-                postHeight: screenWidth * 1.2,
-                imageLink:
-                    'https://i.pinimg.com/736x/79/6f/71/796f71e3f3d24d6b30db0b4636f6d066.jpg'),
-            MoviePoster(
-                postHeight: screenWidth * 1.2,
-                imageLink:
-                    'https://photogallery.indiatimes.com/movies/international/rio-2/photo/33383947/Poster-of-Hollywood-3D-computer-animated-musical-adventure-comedy-film-Rio-2-.jpg')
+                    'https://webneel.com/daily/sites/default/files/images/daily/01-2016/12-the-angry-birds-poster-animation-movie-list-2016.jpg', 
+                    movie_title: 'badu', movie_rating: 123, movie_overview: 'asddfuhvgasdshdvfhvasddf', movie_likes: 200,),
           ],
         ),
       ),

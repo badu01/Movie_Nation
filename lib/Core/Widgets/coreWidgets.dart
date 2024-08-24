@@ -1,3 +1,6 @@
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -6,9 +9,19 @@ import '../Constants/Constants.dart';
 
 class MoviePoster extends StatelessWidget {
   const MoviePoster(
-      {super.key, required this.postHeight, required this.imageLink});
+      {super.key,
+      required this.postHeight,
+      required this.imageLink,
+      required this.movie_title,
+      required this.movie_rating,
+      required this.movie_likes,
+      required this.movie_overview});
   final postHeight;
   final imageLink;
+  final movie_title;
+  final movie_rating;
+  final movie_likes;
+  final movie_overview;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,20 +47,20 @@ class MoviePoster extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: MyColors.secondaryBlack,
                       borderRadius: BorderRadius.circular(50)),
-                  child: const Row(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       kWidth,
-                      Icon(
+                      const Icon(
                         Icons.thumb_up_alt_rounded,
                         size: 20,
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                            const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                         child: Text(
-                          '1.3K',
-                          style: TextStyle(
+                         '${(movie_likes).round()}',
+                          style: const TextStyle(
                               color: MyColors.primaryWhite,
                               fontWeight: FontWeight.bold),
                         ),
@@ -62,20 +75,20 @@ class MoviePoster extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: MyColors.secondaryBlack,
                       borderRadius: BorderRadius.circular(50)),
-                  child: const Row(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       kWidth,
-                      Icon(
+                      const Icon(
                         Icons.thumb_down_alt_rounded,
                         size: 20,
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                            const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                         child: Text(
-                          '300',
-                          style: TextStyle(
+                          '${((movie_likes/10)-25).round()}',
+                          style: const TextStyle(
                               color: MyColors.primaryWhite,
                               fontWeight: FontWeight.bold),
                         ),
@@ -84,35 +97,7 @@ class MoviePoster extends StatelessWidget {
                   ),
                 ),
               ),
-              kWidth,
-              IntrinsicWidth(
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: MyColors.secondaryBlack,
-                      borderRadius: BorderRadius.circular(50)),
-                  child: const Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      kWidth,
-                      Icon(
-                        Icons.woo_commerce_outlined,
-                        size: 20,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        child: Text(
-                          'comments',
-                          style: TextStyle(
-                              color: MyColors.primaryWhite,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              kWidth,
+              const Spacer(),
               IntrinsicWidth(
                 child: Container(
                   decoration: BoxDecoration(
@@ -146,24 +131,27 @@ class MoviePoster extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Angry Birds",
-                          style: TextStyle(
-                              color: MyColors.primaryWhite,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold),
+                        Flexible(
+                          child: Text(
+                            movie_title,
+                            style: const TextStyle(
+                                color: MyColors.primaryWhite,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.visible,
+                          ),
                         ),
                         IntrinsicWidth(
                           child: Container(
                             decoration: BoxDecoration(
-                                color: MyColors.primaryRed,
+                                color:movie_rating>=8.5 ?MyColors.primaryRed : Colors.orange,
                                 borderRadius: BorderRadius.circular(15)),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
+                            child:  Padding(
+                              padding:const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 1),
                               child: Text(
-                                "7.6 rating",
-                                style: TextStyle(
+                                "$movie_rating rating",
+                                style:const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: MyColors.primaryWhite),
                               ),
@@ -172,9 +160,9 @@ class MoviePoster extends StatelessWidget {
                         )
                       ],
                     ),
-                    const Text(
-                      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is',
-                      style: TextStyle(color: MyColors.primaryWhite),
+                    Text(
+                      movie_overview,
+                      style:const TextStyle(color: MyColors.primaryWhite),
                     )
                   ],
                 ),
@@ -211,9 +199,7 @@ Widget searchCard(
             width: screenWidth * .25,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(link),
-                  fit: BoxFit.cover
-                ),
+                    image: NetworkImage(link), fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(20)),
           ),
           kWidth,
