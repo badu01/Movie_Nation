@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_nation/Application/disscover/discover_bloc.dart';
+import 'package:movie_nation/Application/search/search_bloc.dart';
 import 'package:movie_nation/Core/Colors/Colors.dart';
 import 'package:movie_nation/Domain/core/dep_injection/injectable.dart';
 import 'package:movie_nation/Presentation/Pages/AppScreen/app_screen.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => getIt<DiscoverBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<SearchBloc>(),
         ),
       ],
       child: MaterialApp(

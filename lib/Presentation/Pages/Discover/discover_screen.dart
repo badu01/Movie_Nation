@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_nation/Application/disscover/discover_bloc.dart';
-import 'package:movie_nation/Core/Colors/colors.dart';
-import 'package:movie_nation/Core/Constants/Constants.dart';
 import 'package:movie_nation/Core/Widgets/coreWidgets.dart';
 import 'package:movie_nation/Core/Widgets/discover_appbar.dart';
 

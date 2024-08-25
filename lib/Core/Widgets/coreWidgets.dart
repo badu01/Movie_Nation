@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../Colors/colors.dart';
 import '../Constants/Constants.dart';
@@ -184,54 +185,133 @@ Widget searchCard(
   gener,
   link,
 ) {
-  return Container(
-    width: screenWidth,
-    height: screenWidth * .3,
-    decoration: BoxDecoration(
-      color: MyColors.lightBlack,
-      borderRadius: BorderRadius.circular(20),
+  return InkWell(
+    splashColor: Colors.white,
+    onTap: () {
+      
+    },
+    child: Container(
+      width: screenWidth,
+      height: screenWidth * .3,
+      decoration: BoxDecoration(
+        color: MyColors.lightBlack,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Container(
+              width: screenWidth * .25,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(link), fit: BoxFit.cover),
+                  borderRadius: BorderRadius.circular(20)),
+            ),
+            kWidth,
+            SizedBox(
+              width: 180,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  kHeight,
+                  Flexible(
+                    child: Text(
+                      overflow: TextOverflow.fade,
+                      "$movieName",
+                      style:
+                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    '$gener',
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+            const Row(
+              children: [
+                CircleAvatar(
+                  radius: 5,
+                  backgroundColor: MyColors.primaryRed,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 20,
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     ),
-    child: Padding(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          Container(
-            width: screenWidth * .25,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(link), fit: BoxFit.cover),
-                borderRadius: BorderRadius.circular(20)),
-          ),
-          kWidth,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+  );
+}
+
+Widget searchCardLoadingSkeleton(double screenWidth) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Shimmer.fromColors(
+      baseColor: Colors.grey[700]!,  // Darker base color
+      highlightColor: Colors.grey[500]!,  // Lighter highlight color
+      child: Container(
+        width: screenWidth,
+        height: screenWidth * .3,
+        decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(.3),  // Background color matches the base color for consistency
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
             children: [
-              kHeight,
-              Text(
-                "$movieName",
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Container(
+                width: screenWidth * .25,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 202, 25, 25),  // Lighter color for the image placeholder
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
-              Text(
-                '$gener',
-                style: const TextStyle(color: Colors.grey),
+              SizedBox(width: 10),
+              SizedBox(
+                width: screenWidth * 0.45,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 20,
+                      color: Colors.grey[600],  // Lighter color for the text placeholder
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: screenWidth * 0.3,
+                      height: 16,
+                      color: Colors.grey[600],  // Lighter color for the text placeholder
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-          const Spacer(),
-          const Row(
-            children: [
-              CircleAvatar(
-                radius: 5,
-                backgroundColor: MyColors.primaryRed,
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 20,
+              const Spacer(),
+              const Row(
+                children: [
+                  CircleAvatar(
+                    radius: 5,
+                    backgroundColor: Colors.grey,
+                  ),
+                  SizedBox(width: 5),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.grey,
+                    size: 20,
+                  )
+                ],
               )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     ),
   );
